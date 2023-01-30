@@ -130,15 +130,17 @@ int main(void)
 		  	  switch(State)
 		  	  {
 		  	  	  case 0:
-		  	  		  if ( ButtonMatrix == 0x200)
+		  	  		  if ( ButtonMatrix == 0x0)
 		  	  		  {
-		  	  			  State = 1;
+		  	  			  if( ButtonMatrix == 0x200)
+		  	  			  {
+		  	  				  State = 1;
+		  	  			  }
+		  	  			  else if ( ButtonMatrix =! 0x200)
+		  	  			  {
+		  	  				  State = 12;
+		  	  			  }
 		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-
 		  	  		  break;
 		  	  	  case 1:
 		  	  		  if ( ButtonMatrix == 0x2)
