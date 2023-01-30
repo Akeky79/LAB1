@@ -63,6 +63,7 @@ typedef struct
 uint16_t ButtonMatrix = 0;
 PortPin R[4] = { { GPIOA, GPIO_PIN_10 }, { GPIOC, GPIO_PIN_12 }, { GPIOB,GPIO_PIN_5 }, { GPIOB, GPIO_PIN_4 } };
 PortPin L[4] = { { GPIOA, GPIO_PIN_9 }, { GPIOC, GPIO_PIN_7 }, { GPIOB,GPIO_PIN_6 }, { GPIOA, GPIO_PIN_7 } };
+int State = 0;
 void ReadMatrixButton_1Row()
 {
     static uint8_t X = 0;
@@ -126,9 +127,47 @@ int main(void)
 		  {
 		  	  time = HAL_GetTick()+ 50;     //set new time stamp
 		  	  ReadMatrixButton_1Row();
-	      }
-  }
+		  	  switch(State)
+		  	  {
+		  	  	  case 0:
+		  	  		  if ( ButtonMatrix == 0x200)
+		  	  		  {
+		  	  			  State = 1;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 0;
+		  	  		  }
+
+		  	  		  break;
+		  	  	  case 1:
+		  	  		  break;
+		  	  	  case 2:
+		  	  		  break;
+		  	  	  case 3:
+		  	  		  break;
+		  	  	  case 4:
+		  	  		  break;
+		  	  	  case 5:
+		  	  		  break ;
+		  	  	  case 6:
+		  	  		  break ;
+		  	  	  case 7:
+		  	  		  break ;
+		  	  	  case 8:
+		  	  		  break ;
+		  	  	  case 9:
+		  	  		  break ;
+		  	  	  case 10:
+		  	  		  break ;
+		  	  	  case 11:
+		  	  		  break ;
+		  	  	  case 12:
+		  	  		break ;
+		  	  }
+		  }
   /* USER CODE END 3 */
+  }
 }
 
 /**
