@@ -136,33 +136,122 @@ int main(void)
 		  	  		  }
 		  	  		  else
 		  	  		  {
-		  	  			  State = 0;
+		  	  			  State = 12;
 		  	  		  }
 
 		  	  		  break;
 		  	  	  case 1:
+		  	  		  if ( ButtonMatrix == 0x2)
+		  	  		  {
+		  	  			  State = 2;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break;
 		  	  	  case 2:
+		  	  		  if ( ButtonMatrix == 0x400)
+		  	  		  {
+		  	  			  State = 3;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break;
 		  	  	  case 3:
+		  	  		  if ( ButtonMatrix == 0x4)
+		  	  		  {
+		  	  			  State = 4;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break;
 		  	  	  case 4:
+		  	  		  if ( ButtonMatrix == 0x8)
+		  	  		  {
+		  	  			  State = 5;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break;
 		  	  	  case 5:
+		  	  		  if ( ButtonMatrix == 0x40)
+		  	  		  {
+		  	  			  State = 6;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break ;
 		  	  	  case 6:
+		  	  		  if ( ButtonMatrix == 0x8)
+		  	  		  {
+		  	  			  State = 7;
+		  	  		  }
+		  	  		  else
+					  {
+		  	  			  State = 12;
+					  }
 		  	  		  break ;
 		  	  	  case 7:
+		  	  		  if ( ButtonMatrix == 0x8)
+		  	  		  {
+		  	  			  State = 8;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break ;
 		  	  	  case 8:
+		  	  		  if ( ButtonMatrix == 0x8)
+		  	  		  {
+		  	  			  State = 9;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break ;
 		  	  	  case 9:
+		  	  		  if ( ButtonMatrix == 0x1)
+		  	  		  {
+		  	  			  State = 10;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break ;
 		  	  	  case 10:
+		  	  		  if ( ButtonMatrix == 0x10)
+		  	  		  {
+		  	  			  State = 11;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
+		  	  		  }
 		  	  		  break ;
 		  	  	  case 11:
+		  	  		  if ( ButtonMatrix == 0x1000)
+		  	  		  {
+		  	  			State = 12;
+		  	  		  }
 		  	  		  break ;
 		  	  	  case 12:
+		  	  		  if ( ButtonMatrix == 0x1000)
+		  	  		  {
+		  	  			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+		  	  			  State = 0;
+		  	  		  }
 		  	  		break ;
 		  	  }
 		  }
