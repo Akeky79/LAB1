@@ -132,14 +132,7 @@ int main(void)
 		  	  	  case 0:
 		  	  		  if ( ButtonMatrix == 0x0)
 		  	  		  {
-		  	  			  if( ButtonMatrix == 0x200)
-		  	  			  {
-		  	  				  State = 1;
-		  	  			  }
-		  	  			  else if ( ButtonMatrix =! 0x200)
-		  	  			  {
-		  	  				  State = 12;
-		  	  			  }
+		  	  			  if (ButtonMatrix == )
 		  	  		  }
 		  	  		  break;
 		  	  	  case 1:
