@@ -138,11 +138,11 @@ int main(void)
 		  	  switch(State)
 		  	  {
 		  	  	  case 0:
-		  	  		  if ( ButtonMatrix == 0x0)
+		  	  		  if ( ButtonMatrix == 0x0 )
 		  	  		  {
 		  	  			  State = 0;
 		  	  		  }
-		  	  		  else if (0x200)
+		  	  		  else if ( ButtonMatrix == 0x200 )
 		  	  		  {
 		  	  			  State = 1;
 		  	  		  }
