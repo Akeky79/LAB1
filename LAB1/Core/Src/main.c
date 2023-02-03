@@ -60,18 +60,26 @@ typedef struct
 	GPIO_TypeDef* PORT;
 	uint16_t PIN;
 }PortPin;
+
 uint16_t ButtonMatrix = 0;
+
 PortPin R[4] = { { GPIOA, GPIO_PIN_10 }, { GPIOC, GPIO_PIN_12 }, { GPIOB,GPIO_PIN_5 }, { GPIOB, GPIO_PIN_4 } };
 PortPin L[4] = { { GPIOA, GPIO_PIN_9 }, { GPIOC, GPIO_PIN_7 }, { GPIOB,GPIO_PIN_6 }, { GPIOA, GPIO_PIN_7 } };
+
 int State = 0;
+
 void ReadMatrixButton_1Row()
 {
     static uint8_t X = 0;
     register int i;
-    for (i = 0; i < 4; i++) {
-        if (HAL_GPIO_ReadPin(L[i].PORT, L[i].PIN)) {
+    for (i = 0; i < 4; i++)
+    {
+        if (HAL_GPIO_ReadPin(L[i].PORT, L[i].PIN))
+        {
             ButtonMatrix &= ~(1 << (X * 4 + i));
-        } else {
+        }
+        else
+        {
             ButtonMatrix |= 1 << (X * 4 + i);
         }
     }
@@ -132,7 +140,15 @@ int main(void)
 		  	  	  case 0:
 		  	  		  if ( ButtonMatrix == 0x0)
 		  	  		  {
-		  	  			  if (ButtonMatrix == )
+		  	  			  State = 0;
+		  	  		  }
+		  	  		  else if (0x200)
+		  	  		  {
+		  	  			  State = 1;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
 		  	  		  }
 		  	  		  break;
 		  	  	  case 1:
@@ -238,13 +254,13 @@ int main(void)
 		  	  	  case 11:
 		  	  		  if ( ButtonMatrix == 0x1000)
 		  	  		  {
+		  	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
 		  	  			State = 12;
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 12:
 		  	  		  if ( ButtonMatrix == 0x1000)
 		  	  		  {
-		  	  			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
 		  	  			  State = 0;
 		  	  		  }
 		  	  		break ;
