@@ -138,11 +138,11 @@ int main(void)
 		  	  switch(State)
 		  	  {
 		  	  	  case 0:
-		  	  		  if ( ButtonMatrix == 0x0 )
+		  	  		  if(ButtonMatrix == 0x0 )
 		  	  		  {
 		  	  			  State = 0;
 		  	  		  }
-		  	  		  else if ( ButtonMatrix == 0x200 )
+		  	  		  else if(ButtonMatrix == 0x200 )
 		  	  		  {
 		  	  			  State = 1;
 		  	  		  }
@@ -152,7 +152,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 1:
-		  	  		  if ( ButtonMatrix == 0x2)
+		  	  		  if(ButtonMatrix == 0x0 )
+		  	  		  {
+		  	 	  	  	  State = 1;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x2)
 		  	  		  {
 		  	  			  State = 2;
 		  	  		  }
@@ -162,7 +166,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 2:
-		  	  		  if ( ButtonMatrix == 0x400)
+		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  {
+		  	  			  State = 2;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x400)
 		  	  		  {
 		  	  			  State = 3;
 		  	  		  }
@@ -172,7 +180,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 3:
-		  	  		  if ( ButtonMatrix == 0x4)
+		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  {
+		  	  			  State = 3;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x4)
 		  	  		  {
 		  	  			  State = 4;
 		  	  		  }
@@ -182,7 +194,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 4:
-		  	  		  if ( ButtonMatrix == 0x8)
+		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  {
+		  	  			  State = 4;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x8)
 		  	  		  {
 		  	  			  State = 5;
 		  	  		  }
@@ -192,7 +208,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 5:
-		  	  		  if ( ButtonMatrix == 0x40)
+		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  {
+		  	  			  State = 5;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x40)
 		  	  		  {
 		  	  			  State = 6;
 		  	  		  }
@@ -202,7 +222,11 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 6:
-		  	  		  if ( ButtonMatrix == 0x8)
+		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  {
+		  	  			  State = 6;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x8)
 		  	  		  {
 		  	  			  State = 7;
 		  	  		  }
@@ -212,7 +236,11 @@ int main(void)
 					  }
 		  	  		  break ;
 		  	  	  case 7:
-		  	  		  if ( ButtonMatrix == 0x8)
+		  	  		  if (ButtonMatrix == 0x0)
+		  	  		  {
+		  	  			  State = 7;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x8)
 		  	  		  {
 		  	  			  State = 8;
 		  	  		  }
@@ -222,7 +250,11 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 8:
-		  	  		  if ( ButtonMatrix == 0x8)
+		  	  		  if(ButtonMatrix == 0x8)
+		  	  		  {
+		  	  			  State = 8;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x8)
 		  	  		  {
 		  	  			  State = 9;
 		  	  		  }
@@ -232,7 +264,11 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 9:
-		  	  		  if ( ButtonMatrix == 0x1)
+		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  {
+		  	  			  State = 9;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x1)
 		  	  		  {
 		  	  			  State = 10;
 		  	  		  }
@@ -242,7 +278,11 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 10:
-		  	  		  if ( ButtonMatrix == 0x10)
+		  	  		  if(ButtonMatrix == 0x10)
+		  	  		  {
+		  	  			  State = 10;
+		  	  		  }
+		  	  		  else if(ButtonMatrix == 0x10)
 		  	  		  {
 		  	  			  State = 11;
 		  	  		  }
@@ -252,16 +292,24 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 11:
-		  	  		  if ( ButtonMatrix == 0x1000)
+		  	  		  if(ButtonMatrix == 0x1000)
 		  	  		  {
-		  	  			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
-		  	  			State = 12;
+		  	  			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+		  	  			  State = 12;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 11;
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 12:
 		  	  		  if ( ButtonMatrix == 0x1000)
 		  	  		  {
 		  	  			  State = 0;
+		  	  		  }
+		  	  		  else
+		  	  		  {
+		  	  			  State = 12;
 		  	  		  }
 		  	  		break ;
 		  	  }
