@@ -135,14 +135,16 @@ int main(void)
 		  {
 		  	  time = HAL_GetTick()+ 50;     //set new time stamp
 		  	  ReadMatrixButton_1Row();
+
+
 		  	  switch(State)
 		  	  {
 		  	  	  case 0:
-		  	  		  if(ButtonMatrix == 0x0 )
+		  	  		  if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 0;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x200 )
+		  	  		  else if(ButtonMatrix == 512)
 		  	  		  {
 		  	  			  State = 1;
 		  	  		  }
@@ -152,11 +154,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 1:
-		  	  		  if(ButtonMatrix == 0x0 )
+		  	  		  if(ButtonMatrix == 0)
 		  	  		  {
 		  	 	  	  	  State = 1;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x2)
+		  	  		  else if(ButtonMatrix == 4)
 		  	  		  {
 		  	  			  State = 2;
 		  	  		  }
@@ -166,11 +168,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 2:
-		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 2;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x400)
+		  	  		  else if(ButtonMatrix == 1024)
 		  	  		  {
 		  	  			  State = 3;
 		  	  		  }
@@ -180,11 +182,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 3:
-		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 3;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x4)
+		  	  		  else if(ButtonMatrix == 4)
 		  	  		  {
 		  	  			  State = 4;
 		  	  		  }
@@ -194,11 +196,11 @@ int main(void)
 		  	  		  }
 		  	  		  break;
 		  	  	  case 4:
-		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 4;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x8)
+		  	  		  else if(ButtonMatrix == 8)
 		  	  		  {
 		  	  			  State = 5;
 		  	  		  }
@@ -212,7 +214,7 @@ int main(void)
 		  	  		  {
 		  	  			  State = 5;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x40)
+		  	  		  else if(ButtonMatrix == 32)
 		  	  		  {
 		  	  			  State = 6;
 		  	  		  }
@@ -226,7 +228,7 @@ int main(void)
 		  	  		  {
 		  	  			  State = 6;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x8)
+		  	  		  else if(ButtonMatrix == 8)
 		  	  		  {
 		  	  			  State = 7;
 		  	  		  }
@@ -240,7 +242,7 @@ int main(void)
 		  	  		  {
 		  	  			  State = 7;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x8)
+		  	  		  else if(ButtonMatrix == 8)
 		  	  		  {
 		  	  			  State = 8;
 		  	  		  }
@@ -250,11 +252,11 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 8:
-		  	  		  if(ButtonMatrix == 0x8)
+		  	  		  if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 8;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x8)
+		  	  		  else if(ButtonMatrix == 8)
 		  	  		  {
 		  	  			  State = 9;
 		  	  		  }
@@ -264,11 +266,11 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 9:
-		  	  		  if(ButtonMatrix == 0x0)
+		  	  		  if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 9;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x1)
+		  	  		  else if(ButtonMatrix == 1)
 		  	  		  {
 		  	  			  State = 10;
 		  	  		  }
@@ -278,11 +280,11 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 10:
-		  	  		  if(ButtonMatrix == 0x10)
+		  	  		  if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 10;
 		  	  		  }
-		  	  		  else if(ButtonMatrix == 0x10)
+		  	  		  else if(ButtonMatrix == 16)
 		  	  		  {
 		  	  			  State = 11;
 		  	  		  }
@@ -292,22 +294,23 @@ int main(void)
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 11:
-		  	  		  if(ButtonMatrix == 0x1000)
+		  	  		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
+		  	  		  if(ButtonMatrix == 4096)
 		  	  		  {
-		  	  			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
-		  	  			  State = 12;
+		  	  			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
+		  	  			  State = 0;
 		  	  		  }
-		  	  		  else
+		  	  		  else if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 11;
 		  	  		  }
 		  	  		  break ;
 		  	  	  case 12:
-		  	  		  if ( ButtonMatrix == 0x1000)
+		  	  		  if ( ButtonMatrix == 4096)
 		  	  		  {
 		  	  			  State = 0;
 		  	  		  }
-		  	  		  else
+		  	  		  else if(ButtonMatrix == 0)
 		  	  		  {
 		  	  			  State = 12;
 		  	  		  }
