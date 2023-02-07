@@ -62,6 +62,7 @@ typedef struct
 }PortPin;
 
 uint16_t ButtonMatrix = 0;
+uint32_t CheckButton = 0;
 
 PortPin R[4] = { { GPIOA, GPIO_PIN_10 }, { GPIOC, GPIO_PIN_12 }, { GPIOB,GPIO_PIN_5 }, { GPIOB, GPIO_PIN_4 } };
 PortPin L[4] = { { GPIOA, GPIO_PIN_9 }, { GPIOC, GPIO_PIN_7 }, { GPIOB,GPIO_PIN_6 }, { GPIOA, GPIO_PIN_7 } };
@@ -135,187 +136,198 @@ int main(void)
 		  {
 		  	  time = HAL_GetTick()+ 50;     //set new time stamp
 		  	  ReadMatrixButton_1Row();
-
-
-		  	  switch(State)
+		  	  if(CheckButton == 0 && ButtonMatrix > 0)
 		  	  {
-		  	  	  case 0:
-		  	  		  if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 0;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 512)
-		  	  		  {
-		  	  			  State = 1;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break;
-		  	  	  case 1:
-		  	  		  if(ButtonMatrix == 0)
-		  	  		  {
-		  	 	  	  	  State = 1;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 4)
-		  	  		  {
-		  	  			  State = 2;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break;
-		  	  	  case 2:
-		  	  		  if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 2;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 1024)
-		  	  		  {
-		  	  			  State = 3;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break;
-		  	  	  case 3:
-		  	  		  if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 3;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 4)
-		  	  		  {
-		  	  			  State = 4;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break;
-		  	  	  case 4:
-		  	  		  if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 4;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 8)
-		  	  		  {
-		  	  			  State = 5;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break;
-		  	  	  case 5:
-		  	  		  if(ButtonMatrix == 0x0)
-		  	  		  {
-		  	  			  State = 5;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 32)
-		  	  		  {
-		  	  			  State = 6;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break ;
-		  	  	  case 6:
-		  	  		  if(ButtonMatrix == 0x0)
-		  	  		  {
-		  	  			  State = 6;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 8)
-		  	  		  {
-		  	  			  State = 7;
-		  	  		  }
-		  	  		  else
-					  {
-		  	  			  State = 12;
-					  }
-		  	  		  break ;
-		  	  	  case 7:
-		  	  		  if (ButtonMatrix == 0x0)
-		  	  		  {
-		  	  			  State = 7;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 8)
-		  	  		  {
-		  	  			  State = 8;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break ;
-		  	  	  case 8:
-		  	  		  if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 8;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 8)
-		  	  		  {
-		  	  			  State = 9;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break ;
-		  	  	  case 9:
-		  	  		  if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 9;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 1)
-		  	  		  {
-		  	  			  State = 10;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break ;
-		  	  	  case 10:
-		  	  		  if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 10;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 16)
-		  	  		  {
-		  	  			  State = 11;
-		  	  		  }
-		  	  		  else
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		  break ;
-		  	  	  case 11:
-		  	  		  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 1);
-		  	  		  if(ButtonMatrix == 4096)
-		  	  		  {
-		  	  			  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, 0);
-		  	  			  State = 0;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 11;
-		  	  		  }
-		  	  		  break ;
-		  	  	  case 12:
-		  	  		  if ( ButtonMatrix == 4096)
-		  	  		  {
-		  	  			  State = 0;
-		  	  		  }
-		  	  		  else if(ButtonMatrix == 0)
-		  	  		  {
-		  	  			  State = 12;
-		  	  		  }
-		  	  		break ;
+				  switch(State)
+				  {
+					  case 0:
+						  if(ButtonMatrix == 0)
+						  {
+							  State = 0;
+						  }
+						  else if(ButtonMatrix == 512)
+						  {
+							  State = 1;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break;
+					  case 1:
+						  if(ButtonMatrix == 0)
+						  {
+							  State = 1;
+						  }
+						  else if(ButtonMatrix == 2)
+						  {
+							  State = 2;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break;
+					  case 2:
+						  if(ButtonMatrix == 0)
+						  {
+							  State = 2;
+						  }
+						  else if(ButtonMatrix == 1024)
+						  {
+							  State = 3;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break;
+					  case 3:
+						  if(ButtonMatrix == 0)
+						  {
+							  State = 3;
+						  }
+						  else if(ButtonMatrix == 2)
+						  {
+							  State = 4;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break;
+					  case 4:
+						  if(ButtonMatrix == 0)
+						  {
+							  State = 4;
+						  }
+						  else if(ButtonMatrix == 8)
+						  {
+							  State = 5;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break;
+					  case 5:
+						  if(ButtonMatrix == 0x0)
+						  {
+							  State = 5;
+						  }
+						  else if(ButtonMatrix == 32)
+						  {
+							  State = 6;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break ;
+					  case 6:
+						  if(ButtonMatrix == 0x0)
+						  {
+							  State = 6;
+						  }
+						  else if(ButtonMatrix == 8)
+						  {
+							  State = 7;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break ;
+					  case 7:
+						  if (ButtonMatrix == 0x0)
+						  {
+							  State = 7;
+						  }
+						  else if(ButtonMatrix == 8)
+						  {
+							  State = 8;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break ;
+					  case 8:
+						  if(ButtonMatrix == 0)
+						  {
+							  State = 8;
+						  }
+						  else if(ButtonMatrix == 8)
+						  {
+							  State = 9;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break ;
+					  case 9:
+						  if(ButtonMatrix == 0)
+						  {
+							  State = 9;
+						  }
+						  else if(ButtonMatrix == 1)
+						  {
+							  State = 10;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break ;
+					  case 10:
+						  if(ButtonMatrix == 0)
+						  {
+							  State = 10;
+						  }
+						  else if(ButtonMatrix == 16)
+						  {
+							  State = 11;
+						  }
+						  else
+						  {
+							  State = 12;
+						  }
+						  break ;
+					  case 11:
+						  if(ButtonMatrix == 32768)
+						  {
+							  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+							  State = 12;
+						  }
+						  else
+						  {
+							  State = 13;
+						  }
+					  case 12:
+						  if(ButtonMatrix == 4096)
+						  {
+							  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+							  State = 0;
+						  }
+						  else if(ButtonMatrix == 0)
+						  {
+							  State = 12;
+						  }
+						  break ;
+					  case 13:
+						  if ( ButtonMatrix == 4096)
+						  {
+							  State = 0;
+						  }
+						  else if(ButtonMatrix == 0)
+						  {
+							  State = 13;
+						  }
+						  break ;
+				  }
 		  	  }
+		  	  CheckButton = ButtonMatrix;
 		  }
   /* USER CODE END 3 */
   }
