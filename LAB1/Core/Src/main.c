@@ -64,8 +64,20 @@ typedef struct
 uint16_t ButtonMatrix = 0;
 uint16_t CheckButton = 0;
 
-PortPin R[4] = { { GPIOA, GPIO_PIN_10 }, { GPIOC, GPIO_PIN_12 }, { GPIOB,GPIO_PIN_5 }, { GPIOB, GPIO_PIN_4 } };
-PortPin L[4] = { { GPIOA, GPIO_PIN_9 }, { GPIOC, GPIO_PIN_7 }, { GPIOB,GPIO_PIN_6 }, { GPIOA, GPIO_PIN_7 } };
+PortPin R[4] =
+{
+		{ GPIOA, GPIO_PIN_10 },
+		{ GPIOC, GPIO_PIN_12 },
+		{ GPIOB,GPIO_PIN_5 },
+		{ GPIOB, GPIO_PIN_4 }
+};
+PortPin L[4] =
+{
+		{ GPIOA, GPIO_PIN_9 },
+		{ GPIOC, GPIO_PIN_7 },
+		{ GPIOB,GPIO_PIN_6 },
+		{ GPIOA, GPIO_PIN_7 }
+};
 
 int State = 0;
 
@@ -77,11 +89,18 @@ void ReadMatrixButton_1Row()
     {
         if (HAL_GPIO_ReadPin(L[i].PORT, L[i].PIN))
         {
-            ButtonMatrix &= ~(1 << (X * 4 + i));
+            ButtonMatrix = ButtonMatrix & ~(1 << (X * 4 + i));
+            // i=0 x=0
+            // ~(1<< 0)
+            // ~1
+            // ~0b0000000000000001
+            //  0b1111111111111111
+
         }
         else
         {
             ButtonMatrix |= 1 << (X * 4 + i);
+            //
         }
     }
     HAL_GPIO_WritePin(R[X].PORT, R[X].PIN, 1);
@@ -134,7 +153,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
 	  if(time < HAL_GetTick()) // check timer is over 1000us
 		  {
-		  	  time = HAL_GetTick()+ 50;     //set new time stamp
+		  	  time = HAL_GetTick()+ 100;     //set new time stamp
 		  	  ReadMatrixButton_1Row();
 		  	  if(CheckButton == 0 && ButtonMatrix > 0)
 		  	  {
