@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  000147f5  00000000  00000000  000295e0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000768b  00000000  00000000  0003ddd5  2**0
+ 17 .debug_line   00007690  00000000  00000000  0003ddd5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000817bc  00000000  00000000  00045460  2**0
+ 18 .debug_str    000817bc  00000000  00000000  00045465  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  000c6c1c  2**0
+ 19 .comment      00000050  00000000  00000000  000c6c21  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000017c8  00000000  00000000  000c6c6c  2**2
+ 20 .debug_frame  000017c8  00000000  00000000  000c6c74  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -351,7 +351,7 @@ Disassembly of section .text:
  80004da:	bf00      	nop
 
 080004dc <ReadMatrixButton_1Row>:
-PortPin L[4] = { { GPIOA, GPIO_PIN_9 }, { GPIOC, GPIO_PIN_7 }, { GPIOB,GPIO_PIN_6 }, { GPIOA, GPIO_PIN_7 } };
+};
 
 int State = 0;
 
@@ -379,7 +379,7 @@ void ReadMatrixButton_1Row()
  80004fc:	2b00      	cmp	r3, #0
  80004fe:	d012      	beq.n	8000526 <ReadMatrixButton_1Row+0x4a>
         {
-            ButtonMatrix &= ~(1 << (X * 4 + i));
+            ButtonMatrix = ButtonMatrix & ~(1 << (X * 4 + i));
  8000500:	4b32      	ldr	r3, [pc, #200]	; (80005cc <ReadMatrixButton_1Row+0xf0>)
  8000502:	781b      	ldrb	r3, [r3, #0]
  8000504:	009b      	lsls	r3, r3, #2
@@ -398,6 +398,8 @@ void ReadMatrixButton_1Row()
  8000520:	4b2b      	ldr	r3, [pc, #172]	; (80005d0 <ReadMatrixButton_1Row+0xf4>)
  8000522:	801a      	strh	r2, [r3, #0]
  8000524:	e00f      	b.n	8000546 <ReadMatrixButton_1Row+0x6a>
+            //  0b1111111111111111
+
         }
         else
         {
@@ -421,6 +423,7 @@ void ReadMatrixButton_1Row()
  8000546:	3401      	adds	r4, #1
  8000548:	2c03      	cmp	r4, #3
  800054a:	ddcb      	ble.n	80004e4 <ReadMatrixButton_1Row+0x8>
+            //
         }
     }
     HAL_GPIO_WritePin(R[X].PORT, R[X].PIN, 1);
@@ -535,10 +538,10 @@ int main(void)
  80005fa:	4293      	cmp	r3, r2
  80005fc:	d2f9      	bcs.n	80005f2 <main+0x1a>
 		  {
-		  	  time = HAL_GetTick()+ 50;     //set new time stamp
+		  	  time = HAL_GetTick()+ 100;     //set new time stamp
  80005fe:	f000 fb9b 	bl	8000d38 <HAL_GetTick>
  8000602:	4603      	mov	r3, r0
- 8000604:	3332      	adds	r3, #50	; 0x32
+ 8000604:	3364      	adds	r3, #100	; 0x64
  8000606:	607b      	str	r3, [r7, #4]
 		  	  ReadMatrixButton_1Row();
  8000608:	f7ff ff68 	bl	80004dc <ReadMatrixButton_1Row>
